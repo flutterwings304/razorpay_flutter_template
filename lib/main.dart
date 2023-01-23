@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  dotenv.load(fileName: "lib/.env");
   runApp(const MyApp());
 }
 
