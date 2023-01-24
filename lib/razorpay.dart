@@ -1,6 +1,6 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
-import 'package:razorpay_flutter_template/api_services.dart';
+import '../api_services.dart';
 
 class RazorPayIntegration {
   final Razorpay _razorpay = Razorpay(); //Instance of razor pay
@@ -23,6 +23,7 @@ class RazorPayIntegration {
   }
   openSession({required num amount}) {
     createOrder(amount: amount).then((orderId) {
+      print(orderId);
       if (orderId.toString().isNotEmpty) {
         var options = {
           'key': razorPayKey, //Razor pay API Key
@@ -34,22 +35,20 @@ class RazorPayIntegration {
           'timeout': 60, // in seconds
           'prefill': {
             'contact': '9123456789',
-            'email': 'gaurav.kumar@example.com'
+            'email': 'flutterwings304@gmail.com'
           } //contact number and email id of user
         };
         _razorpay.open(options);
-      }
-      else{
-        
-      }
+      } else {}
     });
   }
 
   createOrder({
     required num amount,
   }) async {
-    final myData = await ApiServices().razorPayApi(amount);
+    final myData = await ApiServices().razorPayApi(amount, "rcp_id_1");
     if (myData["status"] == "success") {
+      print(myData);
       return myData["body"]["id"];
     } else {
       return "";
