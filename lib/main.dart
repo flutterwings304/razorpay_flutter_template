@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:razorpay_flutter_template/razorpay.dart';
 
-void main() {
-  dotenv.load(fileName: "lib/.env");
+Future main() async {
+  await dotenv.load(fileName: "lib/.env");
   WidgetsFlutterBinding.ensureInitialized();
 
   runApp(const MyApp());
